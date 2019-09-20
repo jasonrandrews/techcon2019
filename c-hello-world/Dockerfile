@@ -8,4 +8,4 @@ RUN gcc "-DARCH=\"`uname -a`\"" hello.c -o hello
 FROM alpine
 WORKDIR /home
 COPY --from=builder /home/hello .
-ENTRYPOINT ["./hello"]
+CMD ["./hello"]
