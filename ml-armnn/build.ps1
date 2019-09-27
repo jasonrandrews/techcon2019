@@ -7,7 +7,7 @@
 # Each command builds a stage in the Dockerfile using the --target
 
 # Base image derived from Ubuntu 18.04 used for all images
-docker buildx build --platform linux/arm64,linux/arm/v7  --target base --push -t jasonrandrews/ubuntu-arm-base -f Dockerfile .
+#docker buildx build --platform linux/arm64,linux/arm/v7  --target base --push -t jasonrandrews/ubuntu-arm-base -f Dockerfile .
 
 # Full Arm NN SDK build
 #docker buildx build --platform linux/arm64,linux/arm/v7 --target sdk --push -t jasonrandrews/armnn-sdk -f Dockerfile .
