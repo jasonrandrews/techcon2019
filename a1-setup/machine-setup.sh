@@ -39,7 +39,8 @@ sudo sed -i '/PasswordAuthentication no/c\PasswordAuthentication yes' /etc/ssh/s
 sudo service ssh restart 
  
 # change pw 
-echo -e "ArmDocker2019\nArmDocker2019\n" | sudo passwd ubuntu 
+PW=ArmDocker2019
+echo "ubuntu:$PW" | sudo chpasswd 
  
 # Add experimental features to $HOME/.bashrc (if not already there) 
 if grep -q "DOCKER_CLI_EXPERIMENTAL" $HOME/.bashrc; then 
@@ -48,3 +49,17 @@ else
     echo "export DOCKER_CLI_EXPERIMENTAL=enabled" >> $HOME/.bashrc
 fi
  
+# enable remote docker daemon
+sudo mkdir -p /etc/systemd/system/docker.service.d
+sudo touch /etc/systemd/system/docker.service.d/options.conf
+
+echo "[Service]" | sudo tee -a /etc/systemd/system/docker.service.d/options.conf
+echo "ExecStart=" | sudo tee -a /etc/systemd/system/docker.service.d/options.conf
+echo "ExecStart=/usr/bin/dockerd -H unix:// -H tcp://0.0.0.0:2375" | sudo tee -a /etc/systemd/system/docker.service.d/options.conf
+
+# Reload the systemd daemon.
+sudo systemctl daemon-reload
+
+# Restart Docker.
+sudo systemctl restart docker
+
