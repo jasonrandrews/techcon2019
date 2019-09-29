@@ -42,6 +42,9 @@ sudo service ssh restart
 PW=ArmDocker2019
 echo "ubuntu:$PW" | sudo chpasswd 
  
+# don't reset password when an AMI is made
+sudo sed -i '/lock_passwd: True/c\     lock_passwd: False' /etc/cloud/cloud.cfg 
+
 # Add experimental features to $HOME/.bashrc (if not already there) 
 if grep -q "DOCKER_CLI_EXPERIMENTAL" $HOME/.bashrc; then 
     echo "experimental features already set in .bashrc" 
