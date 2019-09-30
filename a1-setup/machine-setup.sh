@@ -60,6 +60,11 @@ echo "[Service]" | sudo tee -a /etc/systemd/system/docker.service.d/options.conf
 echo "ExecStart=" | sudo tee -a /etc/systemd/system/docker.service.d/options.conf
 echo "ExecStart=/usr/bin/dockerd -H unix:// -H tcp://0.0.0.0:2375" | sudo tee -a /etc/systemd/system/docker.service.d/options.conf
 
+# enable experimental features on docker daemon
+echo "{" | sudo tee -a /etc/docker/daemon.json 
+echo "    \"experimental\": true" | sudo tee -a /etc/docker/daemon.json 
+echo "}" | sudo tee -a /etc/docker/daemon.json 
+
 # Reload the systemd daemon.
 sudo systemctl daemon-reload
 
