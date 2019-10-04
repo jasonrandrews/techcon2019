@@ -21,7 +21,7 @@ Here are the steps to run the demo:
      - ```build.ps1```
   4. Edit the inspect.ps1 script to use your Docker ID and run it to see the multi-architecture image
      - ```inspect.ps1```
-  5. Edit run.ps1 and uncommend the platform you want to run, the default is arm64
+  5. Edit run.ps1 to use your Docker ID and uncomment the platform you want to run, the default is arm64
      - ```run.ps1```
      - This will run a container for the uncommented architecture and print it
      - Remove the image when done because docker run will not change architectures already if an image already exists
