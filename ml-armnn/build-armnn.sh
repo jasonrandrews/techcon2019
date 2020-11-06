@@ -48,6 +48,9 @@ echo "Building Arm NN in $HOME/armnn-devenv"
 # Start from home directory
 cd $HOME 
 
+# Gator daemon source
+git clone https://github.com/ARM-software/gator.git
+
 # if nothing, found make a new diectory
 [ -d armnn-devenv ] || mkdir armnn-devenv
 
@@ -172,7 +175,9 @@ cmake ..  \
 -DARMCOMPUTECL=$OpenCL \
 -DPROTOBUF_LIBRARY_DEBUG=$HOME/armnn-devenv/pkg/install/lib/libprotobuf.so \
 -DPROTOBUF_LIBRARY_RELEASE=$HOME/armnn-devenv/pkg/install/lib/libprotobuf.so \
+-DPROFILING_BACKEND_STREAMLINE=1 \
 -DCMAKE_CXX_FLAGS="-Wno-error=sign-conversion" \
+-DGATOR_ROOT=$HOME/gator \
 -DCMAKE_BUILD_TYPE=Debug
 
 if [ $Arch = "armv7l" ] || [ $MEM -lt 2000000 ]; then
